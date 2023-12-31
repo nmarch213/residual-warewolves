@@ -122,6 +122,8 @@ metadata/_edit_group_ = true
 shape = SubResource("RectangleShape2D_r7r4s")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(0.998677, 1)
+zoom = Vector2(1.5, 1.5)
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 editor_draw_drag_margin = true
