@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ct7eqyy6fx1lm"]
+[gd_scene load_steps=18 format=3 uid="uid://ct7eqyy6fx1lm"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_4eu5c"]
 [ext_resource type="Texture2D" uid="uid://vyhot02s7a46" path="res://assets/player/Werewolf.png" id="2_ytjt7"]
@@ -113,6 +113,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Curve2D" id="Curve2D_p1vq1"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 774.016, -743.539, 0, 0, 0, 0, -6.81953, -971.807, 0, 0, 0, 0, -906.997, -703.492, 0, 0, 0, 0, -1042.25, 17.3537, 0, 0, 0, 0, -851.304, 706.162, 0, 0, 0, 0, 1.13659, 939.769, 0, 0, 0, 0, 819.48, 696.818, 0, 0, 0, 0, 944.505, 9.3443, 0, 0, 0, 0, 776.289, -739.534, 0, 0, 0, 0, 774.016, -743.539)
+}
+point_count = 10
+
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(2.08165e-12, 2.08165e-12)
 script = ExtResource("1_4eu5c")
@@ -133,3 +139,11 @@ position = Vector2(-1.14441e-05, -14)
 scale = Vector2(3.16667, 2.04688)
 sprite_frames = SubResource("SpriteFrames_v16l3")
 animation = &"down"
+
+[node name="SpawnPath" type="Path2D" parent="."]
+scale = Vector2(0.879826, 0.74912)
+curve = SubResource("Curve2D_p1vq1")
+
+[node name="SpawnLocation" type="PathFollow2D" parent="SpawnPath"]
+position = Vector2(774.016, -743.539)
+rotation = -2.85718
