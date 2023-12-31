@@ -14,10 +14,9 @@ var player = null
 
 func _physics_process(_delta):
 	if !player:
-		player = get_node("/root/Test/Player")
-	else:
-		# move towards player
-		velocity = position.direction_to(player.position) * run_speed
+		player = get_node("/root/TestLevel/Player")
+
+	velocity = position.direction_to(player.position) * run_speed
 
 	handle_animation()
 	move_and_slide()

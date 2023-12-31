@@ -1,14 +1,14 @@
 [gd_scene load_steps=12 format=3 uid="uid://c2yqxl4voxveq"]
 
-[ext_resource type="PackedScene" uid="uid://ct7eqyy6fx1lm" path="res://player/player.tscn" id="1_hnjdn"]
-[ext_resource type="PackedScene" uid="uid://b88vfanaph2lc" path="res://enemies/snake/snake.tscn" id="2_wdral"]
-[ext_resource type="Texture2D" uid="uid://dwn5f22noxyjl" path="res://assets/tileset/Forest Tilesett.png" id="3_ivtui"]
-[ext_resource type="Texture2D" uid="uid://csojx2bbp4vmw" path="res://assets/tileset/Forest Props.png" id="4_ft2kv"]
-[ext_resource type="Texture2D" uid="uid://lbpy40yq2004" path="res://assets/tileset/Forest Cliff.png" id="5_p3c0t"]
-[ext_resource type="Script" path="res://Spawner.gd" id="6_cowep"]
+[ext_resource type="PackedScene" uid="uid://ct7eqyy6fx1lm" path="res://player/player.tscn" id="1_8il70"]
+[ext_resource type="PackedScene" uid="uid://b88vfanaph2lc" path="res://enemies/snake/snake.tscn" id="2_tnnoi"]
+[ext_resource type="Texture2D" uid="uid://dwn5f22noxyjl" path="res://assets/tileset/Forest Tilesett.png" id="3_ocqmx"]
+[ext_resource type="Texture2D" uid="uid://csojx2bbp4vmw" path="res://assets/tileset/Forest Props.png" id="4_8ambq"]
+[ext_resource type="Texture2D" uid="uid://lbpy40yq2004" path="res://assets/tileset/Forest Cliff.png" id="5_my2mx"]
+[ext_resource type="Script" path="res://Spawner.gd" id="6_b2hfd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ovp0g"]
-texture = ExtResource("3_ivtui")
+texture = ExtResource("3_ocqmx")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -172,7 +172,7 @@ texture = ExtResource("3_ivtui")
 8:19/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rigv0"]
-texture = ExtResource("4_ft2kv")
+texture = ExtResource("4_8ambq")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -788,7 +788,7 @@ texture = ExtResource("4_ft2kv")
 17:36/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ntvjo"]
-texture = ExtResource("5_p3c0t")
+texture = ExtResource("5_my2mx")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -975,13 +975,13 @@ func _process(delta):
 	pass
 "
 
-[node name="Test" type="Node2D"]
+[node name="TestLevel" type="Node2D"]
 position = Vector2(1, -8)
 
-[node name="Player" parent="." instance=ExtResource("1_hnjdn")]
+[node name="Player" parent="." instance=ExtResource("1_8il70")]
 position = Vector2(969, 623)
 
-[node name="Snake" parent="." instance=ExtResource("2_wdral")]
+[node name="Snake" parent="." instance=ExtResource("2_tnnoi")]
 position = Vector2(295, 55)
 run_speed = 40
 
@@ -996,7 +996,7 @@ layer_0/tile_data = PackedInt32Array(0, 3, 0, 1, 65539, 0, 2, 65539, 0, 3, 65539
 metadata/_edit_group_ = true
 
 [node name="Spawner" type="Node" parent="."]
-script = ExtResource("6_cowep")
+script = ExtResource("6_b2hfd")
 
 [node name="SnakeTimer" type="Timer" parent="Spawner"]
 autostart = true
