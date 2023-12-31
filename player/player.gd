@@ -1,9 +1,17 @@
 extends CharacterBody2D
 
 @export var speed = 400
-	
+
+var thrash = preload("res://player/attacks/thrash/thrash.tscn")
+
+func _ready():
+	if(!thrash):
+		thrash.instantiate()
+		thrash.start()
+
 
 func _physics_process(_delta):
+	print(thrash)
 	# handle player movement
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed

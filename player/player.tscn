@@ -119,7 +119,7 @@ _data = {
 }
 point_count = 10
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 position = Vector2(2.08165e-12, 2.08165e-12)
 script = ExtResource("1_4eu5c")
 

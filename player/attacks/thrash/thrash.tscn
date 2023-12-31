@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://0wlghren8m1j"]
+
+[ext_resource type="Script" path="res://player/attacks/thrash/thrash.gd" id="1_2ciqp"]
+[ext_resource type="Texture2D" uid="uid://csjtnblnt7iqe" path="res://assets/player/thrash/small_slash_1.png" id="2_ph30n"]
+[ext_resource type="Texture2D" uid="uid://c8eqwdrj5l0a" path="res://assets/player/thrash/small_slash_2.png" id="3_ypyed"]
+[ext_resource type="Texture2D" uid="uid://dhpeycm2s20tp" path="res://assets/player/thrash/small_slash_3.png" id="4_tglk4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3qfqa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ph30n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ypyed")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_tglk4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vjsn4"]
+size = Vector2(357, 60)
+
+[node name="Thrash" type="Area2D"]
+script = ExtResource("1_2ciqp")
+
+[node name="ThrashTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3qfqa")
+frame_progress = 0.816033
+speed_scale = 2.0
+
+[node name="DamageArea" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 1)
+shape = SubResource("RectangleShape2D_vjsn4")
+disabled = true
+
+[connection signal="timeout" from="ThrashTimer" to="." method="_on_timer_timeout"]

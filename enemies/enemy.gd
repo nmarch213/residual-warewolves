@@ -21,7 +21,10 @@ func _physics_process(delta):
 		move_and_collide(velocity * delta)
 		handle_animation()
 		
-
+func take_damage(damage):
+	health -= damage
+	if health <= 0:
+		queue_free()
 
 func handle_animation():
 	var vec_to_player = player.global_position - global_position
