@@ -7,7 +7,7 @@ var thrash = preload("res://player/attacks/thrash/thrash.tscn")
 func _ready():
 	if(!thrash):
 		thrash.instantiate()
-		thrash.start()
+		thrash.ThrashTimer.start()
 
 
 func _physics_process(_delta):

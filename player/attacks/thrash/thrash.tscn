@@ -34,7 +34,7 @@ autostart = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3qfqa")
-frame_progress = 0.816033
+frame_progress = 0.435516
 speed_scale = 2.0
 
 [node name="DamageArea" type="CollisionShape2D" parent="."]
