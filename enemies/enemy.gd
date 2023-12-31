@@ -10,16 +10,17 @@ const VECTOR_TO_DIRECTION_DICT = {
 	Vector2(0, 1): 'down',
 }
 
+
 var player = null
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if !player:
 		player = get_node("/root/TestLevel/Player")
-
-	velocity = position.direction_to(player.position) * run_speed
-
-	handle_animation()
-	move_and_slide()
+	else:
+		velocity = position.direction_to(player.position) * run_speed
+		move_and_collide(velocity * delta)
+		handle_animation()
+		
 
 
 func handle_animation():
