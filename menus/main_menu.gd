@@ -10,11 +10,22 @@ func _process(delta):
 		$IntroOrgan.stop()
 
 func _on_how_to_play_button_pressed():
+	$HowlSound.play()
 	pass # Replace with function body.
 	#TODO: Make the "How To Play" section visible (also todo: make these nodes)
 
 func _on_quit_button_pressed():
-	get_tree().quit()
+	$MainMenuAnimation.play("quit_animation")
+	
 
 func _on_begin_button_pressed():
-	get_tree().change_scene_to_file("res://test_level.tscn")
+	$MainMenuAnimation.play("begin_animation")
+
+func _on_main_menu_animation_animation_finished(anim_name):
+	match anim_name:
+		"quit_animation":
+			get_tree().quit()
+		"begin_animation":
+			get_tree().change_scene_to_file("res://test_level.tscn")
+		#"menu_display_animation"
+			#pass
