@@ -3,7 +3,7 @@ extends MarginContainer
 func _ready():
 	$MainMenuAnimation.play("menu_display_animation")
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_pressed("menu"): # skip to the end of the animation
 		$MainMenuAnimation.advance(4.5)
 		$IntroDrums.stop()
