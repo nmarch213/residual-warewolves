@@ -28,6 +28,7 @@ func take_damage(damage_amount):
 	show_damage(damage_amount)
 
 	if health <= 0:
+		# added to show FCT and death animation
 		await get_tree().create_timer(1).timeout
 		queue_free()
 
@@ -59,6 +60,9 @@ func get_facing_vector(vec_to_player):
 
 
 func show_damage(damage_amount):
+	# this expects you to add a Marker2d to every enemy named FCT to show the dmg
+	if !$FCT:
+		return
 	var fct = FCT_scene.instantiate()
 	$FCT.add_child(fct)
 	fct.show_dmg(damage_amount, fct)
