@@ -127,3 +127,7 @@ sprite_frames = SubResource("SpriteFrames_sa4r1")
 animation = &"left"
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[node name="FCT" type="Marker2D" parent="."]
+visibility_layer = 2
+position = Vector2(-2, -63)
