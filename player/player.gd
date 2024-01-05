@@ -55,4 +55,4 @@ func shoot():
 	# rotate the bullet so that it is facing forward when shot
 	b.rotation_degrees = bullet_rotation_degrees
 	
-	add_child(b)	
+	get_tree().get_root().add_child(b)	
