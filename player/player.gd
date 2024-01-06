@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var Bullet : PackedScene
 
 # XP System
-@export (int) var level = 1
+@export var level = 1
 var experience = 0
 var experience_total = 0
 var experience_to_level = get_required_experience_to_level(level + 1)
@@ -14,9 +14,6 @@ var experience_to_level = get_required_experience_to_level(level + 1)
 var muzzle_right_vector = Vector2(90, 0)
 var muzzle_left_vector = Vector2(-90, 0)
 var bullet_rotation_degrees = 0
-
-
-
 
 func _physics_process(_delta):
 	# handle player movement
@@ -63,8 +60,8 @@ func shoot():
 	
 	add_child(b)
 
-func get_required_experience_to_level(level: int):
-	return round(power(level, 1.8) + level * 4)
+func get_required_experience_to_level(newlevel: int):
+	return round(pow(newlevel, 1.8) + newlevel * 4)
 
 func gain_experience(amount: int):
 	experience += amount
@@ -80,5 +77,6 @@ func level_up():
 	# increase the player's speed by 10%
 	speed *= 1.1
 	max_health *= 1.1
+	health = max_health
 
 

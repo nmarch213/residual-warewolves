@@ -1,7 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://c2yqxl4voxveq"]
+[gd_scene load_steps=14 format=3 uid="uid://c2yqxl4voxveq"]
 
 [ext_resource type="PackedScene" uid="uid://ct7eqyy6fx1lm" path="res://player/player.tscn" id="1_8il70"]
+[ext_resource type="Script" path="res://test_level.gd" id="1_qq6qi"]
 [ext_resource type="PackedScene" uid="uid://b88vfanaph2lc" path="res://enemies/snake/snake.tscn" id="2_tnnoi"]
+[ext_resource type="PackedScene" uid="uid://cti1e85mbax17" path="res://player/ui.tscn" id="2_uy2vw"]
 [ext_resource type="Texture2D" uid="uid://dwn5f22noxyjl" path="res://assets/tileset/Forest Tilesett.png" id="3_ocqmx"]
 [ext_resource type="Texture2D" uid="uid://csojx2bbp4vmw" path="res://assets/tileset/Forest Props.png" id="4_8ambq"]
 [ext_resource type="Texture2D" uid="uid://lbpy40yq2004" path="res://assets/tileset/Forest Cliff.png" id="5_my2mx"]
@@ -977,9 +979,16 @@ func _process(_delta):
 
 [node name="TestLevel" type="Node2D"]
 position = Vector2(1, -8)
+script = ExtResource("1_qq6qi")
+
+[node name="Ui" parent="." instance=ExtResource("2_uy2vw")]
 
 [node name="Player" parent="." instance=ExtResource("1_8il70")]
 position = Vector2(969, 623)
+health = 100
+max_health = 100
+speed = 400
+level = 1
 
 [node name="Snake" parent="." instance=ExtResource("2_tnnoi")]
 position = Vector2(295, 55)
