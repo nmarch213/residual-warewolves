@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ct7eqyy6fx1lm"]
+[gd_scene load_steps=13 format=3 uid="uid://ct7eqyy6fx1lm"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_4eu5c"]
 [ext_resource type="PackedScene" uid="uid://chipkr4bkx17o" path="res://assets/weapons/bullet.tscn" id="2_32vb0"]
@@ -6,18 +6,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r7r4s"]
 size = Vector2(93, 94)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4uwim"]
-atlas = ExtResource("2_ytjt7")
-region = Rect2(0, 128, 48, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lai47"]
-atlas = ExtResource("2_ytjt7")
-region = Rect2(48, 128, 48, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j2dun"]
-atlas = ExtResource("2_ytjt7")
-region = Rect2(96, 128, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oyfx2"]
 atlas = ExtResource("2_ytjt7")
@@ -43,34 +31,8 @@ region = Rect2(48, 64, 48, 64)
 atlas = ExtResource("2_ytjt7")
 region = Rect2(96, 64, 48, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1jwnn"]
-atlas = ExtResource("2_ytjt7")
-region = Rect2(0, 0, 48, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ck4lu"]
-atlas = ExtResource("2_ytjt7")
-region = Rect2(48, 0, 48, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ig0ib"]
-atlas = ExtResource("2_ytjt7")
-region = Rect2(96, 0, 48, 64)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_v16l3"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4uwim")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lai47")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j2dun")
-}],
-"loop": true,
-"name": &"down",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_oyfx2")
@@ -97,20 +59,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"right",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1jwnn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ck4lu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ig0ib")
-}],
-"loop": true,
-"name": &"up",
 "speed": 5.0
 }]
 
@@ -140,7 +88,8 @@ editor_draw_drag_margin = true
 position = Vector2(-1.14441e-05, -14)
 scale = Vector2(3.16667, 2.04688)
 sprite_frames = SubResource("SpriteFrames_v16l3")
-animation = &"down"
+animation = &"right"
+autoplay = "right"
 
 [node name="SpawnPath" type="Path2D" parent="."]
 scale = Vector2(0.879826, 0.74912)
@@ -151,7 +100,7 @@ position = Vector2(774.016, -743.539)
 rotation = -2.85718
 
 [node name="Muzzle" type="Marker2D" parent="."]
-position = Vector2(76, -21)
+position = Vector2(90, 2.08165e-12)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
