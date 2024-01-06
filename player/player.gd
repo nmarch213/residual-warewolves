@@ -2,11 +2,12 @@ extends CharacterBody2D
 
 @export var speed = 400
 @export var Bullet : PackedScene
-
+@onready var LaserSFX = $LaserShoot
+@onready var PlayerHitSFX = $PlayerHit
+@onready var PlayerDeathSFX = $PlayerDeath
 var muzzle_right_vector = Vector2(90, 0)
 var muzzle_left_vector = Vector2(-90, 0)
 var bullet_rotation_degrees = 0
-
 
 func _physics_process(_delta):
 	# handle player movement
@@ -17,6 +18,14 @@ func _physics_process(_delta):
 	
 	if input_direction.x == 0 and input_direction.y == 0:
 		$Sprite.stop()
+		
+		#attempting to add some sort of timer mechanic to prevent ear spam from the hit SFX.
+		if $HitTimer.time_left == 0:
+			PlayerHitSFX.play()
+			$HitTimer.start()
+		
+		
+		
 	elif input_direction.x <= 0 && input_direction.y == 0:
 		$Sprite.play("left")
 		
@@ -38,7 +47,6 @@ func _physics_process(_delta):
 	elif input_direction.y >= 0 && input_direction.x == 0:
 		$Sprite.play("down")
 
-
 func _on_timer_timeout():
 	shoot()
 
@@ -54,5 +62,8 @@ func shoot():
 	
 	# rotate the bullet so that it is facing forward when shot
 	b.rotation_degrees = bullet_rotation_degrees
+	
+	# play laser sfx
+	LaserSFX.play()
 	
 	get_tree().get_root().add_child(b)	

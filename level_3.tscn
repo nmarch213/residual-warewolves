@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://b066r2gwy2rlh" path="res://assets/tileset/level_1.tres" id="1_87ohr"]
 [ext_resource type="PackedScene" uid="uid://ct7eqyy6fx1lm" path="res://player/player.tscn" id="2_say1d"]
-[ext_resource type="AudioStream" uid="uid://qs72krahe3kc" path="res://assets/music/Level 3/Sewer Track.wav" id="3_yae8m"]
+[ext_resource type="AudioStream" uid="uid://qs72krahe3kc" path="res://assets/sound/music/Level 3/Sewer Track.wav" id="3_yae8m"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -25,3 +25,4 @@ scale = Vector2(0.295, 0.295)
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_yae8m")
 volume_db = -6.575
+autoplay = true

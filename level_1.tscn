@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ca2276jwxfcwb"]
 
 [ext_resource type="TileSet" uid="uid://b066r2gwy2rlh" path="res://assets/tileset/level_1.tres" id="1_raxgv"]
-[ext_resource type="AudioStream" uid="uid://ylsjnxfhhulf" path="res://assets/music/Level 1/Forest Track.wav" id="9_1h3fq"]
+[ext_resource type="AudioStream" uid="uid://ylsjnxfhhulf" path="res://assets/sound/music/Level 1/Forest Track.wav" id="9_1h3fq"]
 [ext_resource type="PackedScene" uid="uid://ct7eqyy6fx1lm" path="res://player/player.tscn" id="10_epved"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lnvfu"]
@@ -44,7 +44,6 @@ layer_5/tile_data = PackedInt32Array(327681, 1376257, 8, 851969, 786433, 16, 917
 stream = ExtResource("9_1h3fq")
 volume_db = -6.559
 autoplay = true
-stream_paused = true
 
 [node name="Player" parent="." instance=ExtResource("10_epved")]
 position = Vector2(969, 623)

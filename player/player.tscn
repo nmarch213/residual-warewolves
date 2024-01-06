@@ -1,8 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://ct7eqyy6fx1lm"]
+[gd_scene load_steps=22 format=3 uid="uid://ct7eqyy6fx1lm"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_4eu5c"]
 [ext_resource type="PackedScene" uid="uid://chipkr4bkx17o" path="res://assets/weapons/bullet.tscn" id="2_32vb0"]
 [ext_resource type="Texture2D" uid="uid://vyhot02s7a46" path="res://assets/player/Werewolf.png" id="2_ytjt7"]
+[ext_resource type="AudioStream" uid="uid://dcfqd43jd1wjk" path="res://assets/sound/SFX/laserShoot.wav" id="4_olqv0"]
+[ext_resource type="AudioStream" uid="uid://lbfm41jav0oi" path="res://assets/sound/SFX/hitHurt.wav" id="5_vaey2"]
+[ext_resource type="AudioStream" uid="uid://vpfav1leudmu" path="res://assets/sound/SFX/Howl_low.wav" id="6_aic2r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r7r4s"]
 size = Vector2(93, 94)
@@ -156,5 +159,21 @@ position = Vector2(76, -21)
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
+
+[node name="HitTimer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[node name="LaserShoot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_olqv0")
+bus = &"SFX"
+
+[node name="PlayerHit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_vaey2")
+bus = &"SFX"
+
+[node name="PlayerDeath" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_aic2r")
+bus = &"SFX"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
