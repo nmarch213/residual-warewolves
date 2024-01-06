@@ -22,11 +22,6 @@ func _physics_process(delta):
 		move_and_collide(velocity * delta)
 		handle_animation()
 
-func _on_health_tracker_death():
-	await get_tree().create_timer(1).timeout
-	queue_free()
-
-
 func handle_animation():
 	var vec_to_player = player.global_position - global_position
 	vec_to_player = vec_to_player.normalized()
@@ -52,11 +47,13 @@ func get_facing_vector(vec_to_player):
 			facing = vec
 	return facing
 
-
-func show_damage(damage_amount):
-	# this expects you to add a Marker2d to every enemy named FCT to show the dmg
+func _on_health_tracker_damage_taken(amount):
 	if !$FCT:
 		return
 	var fct = FCT_scene.instantiate()
 	$FCT.add_child(fct)
-	fct.show_dmg(damage_amount, fct)
+	fct.show_dmg(amount, fct)
+
+
+func _on_health_tracker_death():
+	queue_free()

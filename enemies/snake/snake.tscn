@@ -116,7 +116,6 @@ animations = [{
 
 [node name="Snake" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_ps1nu")
-health = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.08165e-12, 2.08165e-12)
@@ -136,6 +135,7 @@ position = Vector2(-2, -63)
 
 [node name="HealthTracker" type="Node2D" parent="."]
 script = ExtResource("3_t3gk0")
-MAX_HP = 1000.0
+MAX_HP = 300.0
 
+[connection signal="damage_taken" from="HealthTracker" to="." method="_on_health_tracker_damage_taken"]
 [connection signal="death" from="HealthTracker" to="." method="_on_health_tracker_death"]

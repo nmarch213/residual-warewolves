@@ -5,7 +5,7 @@ class_name HealthTracker
 var current_hp : float
 
 signal death
-signal damage
+signal damage_taken(damage)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -14,6 +14,7 @@ func _ready():
 
 func take_damage(damage):
 	current_hp -= damage
+	damage_taken.emit(damage)
 	if current_hp <= 0:
 		death.emit()
 	if get_parent().has_method('show_damage'):

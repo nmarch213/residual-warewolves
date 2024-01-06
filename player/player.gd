@@ -9,7 +9,7 @@ var bullet_rotation_degrees = 0
 
 
 func _ready():
-	$HealthTracker.current_hp = 50
+	$HealthTracker.current_hp = $HealthTracker.MAX_HP / 2
 
 func _physics_process(_delta):
 	# Make sprite damage% redder
