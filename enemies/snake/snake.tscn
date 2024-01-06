@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://b88vfanaph2lc"]
+[gd_scene load_steps=18 format=3 uid="uid://b88vfanaph2lc"]
 
 [ext_resource type="Texture2D" uid="uid://hl8ojdt3gn5p" path="res://assets/enemies/Snake Rework.png" id="1_5gsyj"]
 [ext_resource type="Script" path="res://enemies/snake/snake.gd" id="1_ps1nu"]
+[ext_resource type="Script" path="res://components/HealthTracker.gd" id="3_t3gk0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_umqoh"]
 radius = 38.0132
@@ -115,6 +116,7 @@ animations = [{
 
 [node name="Snake" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_ps1nu")
+health = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.08165e-12, 2.08165e-12)
@@ -131,3 +133,9 @@ animation = &"left"
 [node name="FCT" type="Marker2D" parent="."]
 visibility_layer = 2
 position = Vector2(-2, -63)
+
+[node name="HealthTracker" type="Node2D" parent="."]
+script = ExtResource("3_t3gk0")
+MAX_HP = 1000.0
+
+[connection signal="death" from="HealthTracker" to="." method="_on_health_tracker_death"]

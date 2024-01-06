@@ -8,8 +8,29 @@ var muzzle_left_vector = Vector2(-90, 0)
 var bullet_rotation_degrees = 0
 
 
+func _ready():
+	$HealthTracker.current_hp = 50
+
 func _physics_process(_delta):
-	# handle player movement
+	# Make sprite damage% redder
+	var health_pct = $HealthTracker.current_hp / $HealthTracker.MAX_HP
+	$Sprite.modulate = Color(1, health_pct, health_pct)
+
+	move()
+
+# SIGNALS
+func _on_timer_timeout():
+	shoot()
+
+func _on_health_tracker_death():
+	#TODO: display a game over
+	get_tree().change_scene_to_file("res://menus/main_menu.tscn")
+
+func _on_health_regen_timer_timeout():
+	$HealthTracker.heal(10)
+
+# METHODS
+func move():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed
 	move_and_slide()
@@ -37,12 +58,7 @@ func _physics_process(_delta):
 		$Sprite.play("up")
 	elif input_direction.y >= 0 && input_direction.x == 0:
 		$Sprite.play("down")
-
-
-func _on_timer_timeout():
-	shoot()
-
-
+		
 func shoot():
 	var b = Bullet.instantiate()
 	

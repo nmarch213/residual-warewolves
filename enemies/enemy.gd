@@ -3,7 +3,6 @@ class_name Enemy extends CharacterBody2D
 var FCT_scene = preload("res://enemies/FCT/FCT.tscn")
 
 @export var run_speed = 100
-@export var health = 100
 
 const VECTOR_TO_DIRECTION_DICT = {
 	Vector2(1, 0): 'right',
@@ -23,14 +22,9 @@ func _physics_process(delta):
 		move_and_collide(velocity * delta)
 		handle_animation()
 
-func take_damage(damage_amount):
-	health -= damage_amount
-	show_damage(damage_amount)
-
-	if health <= 0:
-		# added to show FCT and death animation
-		await get_tree().create_timer(1).timeout
-		queue_free()
+func _on_health_tracker_death():
+	await get_tree().create_timer(1).timeout
+	queue_free()
 
 
 func handle_animation():
