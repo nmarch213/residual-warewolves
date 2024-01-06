@@ -8,6 +8,8 @@ var muzzle_left_vector = Vector2(-90, 0)
 var bullet_rotation_degrees = 0
 
 
+
+
 func _physics_process(_delta):
 	# handle player movement
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -33,10 +35,6 @@ func _physics_process(_delta):
 		
 		# update this so the bullet is rotated to face forward when shot
 		bullet_rotation_degrees = 0
-	elif input_direction.y <= 0 && input_direction.x == 0:
-		$Sprite.play("up")
-	elif input_direction.y >= 0 && input_direction.x == 0:
-		$Sprite.play("down")
 
 
 func _on_timer_timeout():
@@ -55,4 +53,4 @@ func shoot():
 	# rotate the bullet so that it is facing forward when shot
 	b.rotation_degrees = bullet_rotation_degrees
 	
-	add_child(b)	
+	add_child(b)
