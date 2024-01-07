@@ -1,11 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://ct7eqyy6fx1lm"]
+[gd_scene load_steps=14 format=3 uid="uid://ct7eqyy6fx1lm"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_4eu5c"]
 [ext_resource type="PackedScene" uid="uid://chipkr4bkx17o" path="res://assets/weapons/bullet.tscn" id="2_32vb0"]
 [ext_resource type="Texture2D" uid="uid://vyhot02s7a46" path="res://assets/player/Werewolf.png" id="2_ytjt7"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r7r4s"]
-size = Vector2(93, 94)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oyfx2"]
 atlas = ExtResource("2_ytjt7")
@@ -68,14 +65,16 @@ _data = {
 }
 point_count = 10
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r7r4s"]
+size = Vector2(93, 94)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_olsah"]
+radius = 143.892
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 position = Vector2(2.08165e-12, 2.08165e-12)
 script = ExtResource("1_4eu5c")
 Bullet = ExtResource("2_32vb0")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.5, -2.08165e-12)
-shape = SubResource("RectangleShape2D_r7r4s")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(0.998677, 1)
@@ -106,4 +105,13 @@ position = Vector2(90, 2.08165e-12)
 wait_time = 2.0
 autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, -2.08165e-12)
+shape = SubResource("RectangleShape2D_r7r4s")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_olsah")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
