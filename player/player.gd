@@ -3,8 +3,6 @@ class_name Player
 
 signal experience_gained()
 
-@export var health = 100
-@export var max_health = 100
 @export var speed = 400
 @export var Bullet : PackedScene
 
@@ -19,11 +17,11 @@ var muzzle_left_vector = Vector2(-90, 0)
 var bullet_rotation_degrees = 0
 
 func _ready():
-	$HealthTracker.current_hp = $HealthTracker.MAX_HP / 2
+	$HealthTracker.current_hp = $HealthTracker.max_hp / 2
 
 func _physics_process(_delta):
 	# Make sprite damage% redder
-	var health_pct = $HealthTracker.current_hp / $HealthTracker.MAX_HP
+	var health_pct = $HealthTracker.current_hp / $HealthTracker.max_hp
 	$Sprite.modulate = Color(1, health_pct, health_pct)
 
 	move()
@@ -95,5 +93,5 @@ func level_up():
 	print("Level Up! Level: ", level)
 	# increase the player's speed by 10%
 	speed *= 1.1
-	max_health *= 1.1
-	health = max_health
+	$HealthTracker.max_hp *= 1.1
+	$HealthTracker.heal_full()

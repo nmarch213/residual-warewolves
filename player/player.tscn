@@ -110,7 +110,7 @@ autostart = true
 
 [node name="HealthTracker" type="Node2D" parent="."]
 script = ExtResource("4_ms58d")
-MAX_HP = 1000.0
+max_hp = 1000.0
 
 [node name="HealthRegenTimer" type="Timer" parent="."]
 autostart = true

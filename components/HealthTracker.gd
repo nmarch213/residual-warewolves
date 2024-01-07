@@ -1,7 +1,7 @@
 extends Node2D
 class_name HealthTracker
 
-@export var MAX_HP := 100.0
+@export var max_hp := 100.0
 var current_hp : float
 
 signal death
@@ -10,7 +10,7 @@ signal damage_taken(damage)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	current_hp = MAX_HP
+	current_hp = max_hp
 
 func take_damage(damage):
 	current_hp -= damage
@@ -21,4 +21,7 @@ func take_damage(damage):
 		get_parent().show_damage(damage)
 
 func heal(amount):
-	current_hp = min(current_hp + amount, MAX_HP)
+	current_hp = min(current_hp + amount, max_hp)
+
+func heal_full():
+	current_hp = max_hp

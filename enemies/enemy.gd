@@ -4,6 +4,7 @@ var FCT_scene = preload("res://enemies/FCT/FCT.tscn")
 var XP_Shard_scene = preload("res://items/xp/xp_shard.tscn")
 
 @export var run_speed = 100
+@export var dmg = 1
 
 const VECTOR_TO_DIRECTION_DICT = {
 	Vector2(1, 0): 'right',
@@ -13,6 +14,7 @@ const VECTOR_TO_DIRECTION_DICT = {
 }
 
 var player: Player
+var dmg_body: Player
 
 func _physics_process(delta):
 		if !player:
@@ -60,3 +62,15 @@ func _on_health_tracker_death():
 	get_parent().add_child(shard)
 	shard.position = global_position
 	queue_free()
+
+func _on_area_2d_body_entered(body):
+	if body.is_in_group("Player"):
+		dmg_body = body
+		
+func _on_damage_area_2d_body_exited(body):
+	if body.is_in_group("Player"):
+		dmg_body = null
+
+func _on_damage_timer_timeout():
+	if dmg_body:
+		dmg_body.get_node("HealthTracker").take_damage(dmg)
