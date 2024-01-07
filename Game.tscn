@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bafsic0i72r18"]
+
+[ext_resource type="PackedScene" uid="uid://cti1e85mbax17" path="res://player/ui.tscn" id="1_5eixk"]
+[ext_resource type="Script" path="res://game.gd" id="1_72ugb"]
+[ext_resource type="PackedScene" uid="uid://ct7eqyy6fx1lm" path="res://player/player.tscn" id="2_gwulm"]
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "ui")]
+script = ExtResource("1_72ugb")
+player = NodePath("Player")
+ui = NodePath("UserInterface")
+
+[node name="Player" parent="." instance=ExtResource("2_gwulm")]
+position = Vector2(575, 300)
+
+[node name="UserInterface" parent="." instance=ExtResource("1_5eixk")]
+follow_viewport_enabled = false

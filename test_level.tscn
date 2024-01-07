@@ -981,14 +981,10 @@ func _process(_delta):
 position = Vector2(1, -8)
 script = ExtResource("1_qq6qi")
 
-[node name="Ui" parent="." instance=ExtResource("2_uy2vw")]
+[node name="UserInterface" parent="." instance=ExtResource("2_uy2vw")]
 
 [node name="Player" parent="." instance=ExtResource("1_8il70")]
 position = Vector2(969, 623)
-health = 100
-max_health = 100
-speed = 400
-level = 1
 
 [node name="Snake" parent="." instance=ExtResource("2_tnnoi")]
 position = Vector2(295, 55)

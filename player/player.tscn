@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://ct7eqyy6fx1lm"]
+[gd_scene load_steps=13 format=3 uid="uid://ct7eqyy6fx1lm"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_4eu5c"]
 [ext_resource type="PackedScene" uid="uid://chipkr4bkx17o" path="res://assets/weapons/bullet.tscn" id="2_32vb0"]
 [ext_resource type="Texture2D" uid="uid://vyhot02s7a46" path="res://assets/player/Werewolf.png" id="2_ytjt7"]
-[ext_resource type="PackedScene" uid="uid://cti1e85mbax17" path="res://player/ui.tscn" id="3_uskor"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oyfx2"]
 atlas = ExtResource("2_ytjt7")
@@ -72,11 +71,7 @@ size = Vector2(93, 94)
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(2.08165e-12, 2.08165e-12)
 script = ExtResource("1_4eu5c")
-health = null
-max_health = null
-speed = null
 Bullet = ExtResource("2_32vb0")
-level = null
 
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(0.998677, 1)
@@ -84,8 +79,6 @@ zoom = Vector2(1.5, 1.5)
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 editor_draw_drag_margin = true
-
-[node name="Ui" parent="Camera2D" instance=ExtResource("3_uskor")]
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1.14441e-05, -14)
