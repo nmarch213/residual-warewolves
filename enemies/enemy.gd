@@ -2,6 +2,7 @@ class_name Enemy extends CharacterBody2D
 
 var FCT_scene = preload("res://enemies/FCT/FCT.tscn")
 
+
 @export var run_speed = 100
 @export var health = 100
 
@@ -12,13 +13,12 @@ const VECTOR_TO_DIRECTION_DICT = {
 	Vector2(0, 1): 'down',
 }
 
-
-var player = null
+var player: Player
 
 func _physics_process(delta):
-	if !player:
-		player = get_node("/root/TestLevel/Player")
-	else:
+		if !player:
+			player = get_tree().get_nodes_in_group("Player")[0]
+			return
 		velocity = position.direction_to(player.position) * run_speed
 		move_and_collide(velocity * delta)
 		handle_animation()

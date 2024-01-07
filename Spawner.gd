@@ -1,8 +1,9 @@
 extends Node
 
 var snake = preload("res://enemies/snake/Snake.tscn")
+@onready var player = %Player;
 
-
+@export var spawn_location: PathFollow2D 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,7 +16,6 @@ func _on_snake_timer_timeout():
 
 
 func spawn_enemy_on_path(enemy: Enemy):
-	var spawn_location= get_node("../Player/SpawnPath/SpawnLocation")
 	spawn_location.progress_ratio = randf()
 	enemy.position = spawn_location.position
 
