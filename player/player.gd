@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-signal experience_gained(growth_data)
+signal experience_gained()
 
 @export var health = 100
 @export var max_health = 100
@@ -68,13 +68,10 @@ func get_required_experience_to_level(newlevel: int):
 func gain_experience(amount: int):
 	experience += amount
 	experience_total += amount
-	var growth_data = []
 	while experience >= experience_to_level:
 		experience -= experience_to_level
-		growth_data.append([experience_to_level, experience_to_level])
 		level_up()
-	growth_data.append([experience, experience_to_level])
-	emit_signal("experience_gained", growth_data)
+	emit_signal("experience_gained", experience, experience_to_level)
 
 func level_up():
 	level += 1

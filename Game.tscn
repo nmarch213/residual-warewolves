@@ -981,10 +981,6 @@ script = ExtResource("1_72ugb")
 player = NodePath("Player")
 ui = NodePath("UserInterface")
 
-[node name="Player" parent="." groups=["Player"] instance=ExtResource("2_gwulm")]
-unique_name_in_owner = true
-position = Vector2(575, 300)
-
 [node name="UserInterface" parent="." instance=ExtResource("1_5eixk")]
 follow_viewport_enabled = false
 
@@ -1006,7 +1002,11 @@ spawn_location = NodePath("../Player/SpawnPath/SpawnLocation")
 autostart = true
 script = SubResource("GDScript_q2jvm")
 
-[connection signal="timeout" from="Player/Timer" to="Player" method="_on_timer_timeout"]
+[node name="Player" parent="." instance=ExtResource("2_gwulm")]
+unique_name_in_owner = true
+
 [connection signal="timeout" from="Spawner/SnakeTimer" to="Spawner" method="_on_snake_timer_timeout"]
+[connection signal="experience_gained" from="Player" to="UserInterface" method="_on_player_experience_gained"]
+[connection signal="timeout" from="Player/Timer" to="Player" method="_on_timer_timeout"]
 
 [editable path="Player"]
