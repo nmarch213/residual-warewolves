@@ -1,7 +1,7 @@
 class_name Enemy extends CharacterBody2D
 
 var FCT_scene = preload("res://enemies/FCT/FCT.tscn")
-
+var XP_Shard_scene = preload("res://items/xp/xp_shard.tscn")
 
 @export var run_speed = 100
 @export var health = 100
@@ -28,6 +28,9 @@ func take_damage(damage_amount):
 	show_damage(damage_amount)
 
 	if health <= 0:
+		var shard = XP_Shard_scene.instantiate()
+		get_parent().add_child(shard)
+		shard.position = global_position
 		# added to show FCT and death animation
 		await get_tree().create_timer(1).timeout
 		queue_free()
