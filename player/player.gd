@@ -24,7 +24,6 @@ func _physics_process(_delta):
 	velocity = input_direction * speed
 	move_and_slide()
 	
-	
 	if input_direction.x == 0 and input_direction.y == 0:
 		$Sprite.stop()
 	elif input_direction.x <= 0 && input_direction.y == 0:

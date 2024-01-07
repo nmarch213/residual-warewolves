@@ -1006,6 +1006,7 @@ spawn_location = NodePath("../Player/SpawnPath/SpawnLocation")
 autostart = true
 script = SubResource("GDScript_q2jvm")
 
+[connection signal="timeout" from="Player/Timer" to="Player" method="_on_timer_timeout"]
 [connection signal="timeout" from="Spawner/SnakeTimer" to="Spawner" method="_on_snake_timer_timeout"]
 
 [editable path="Player"]
