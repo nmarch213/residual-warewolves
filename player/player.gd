@@ -8,6 +8,10 @@ signal experience_gained()
 @export var speed = 400
 @export var Bullet : PackedScene
 
+@onready var LaserSFX = $LaserShoot
+@onready var PlayerHitSFX = $PlayerHit
+@onready var PlayerDeathSFX = $PlayerDeath
+
 # XP System
 @export var level = 1
 var experience = 0
@@ -26,6 +30,14 @@ func _physics_process(_delta):
 	
 	if input_direction.x == 0 and input_direction.y == 0:
 		$Sprite.stop()
+		
+		#attempting to add some sort of timer mechanic to prevent ear spam from the hit SFX.
+		if $HitTimer.time_left == 0:
+			PlayerHitSFX.play()
+			$HitTimer.start()
+		
+		
+		
 	elif input_direction.x <= 0 && input_direction.y == 0:
 		$Sprite.play("left")
 		
@@ -43,7 +55,6 @@ func _physics_process(_delta):
 		# update this so the bullet is rotated to face forward when shot
 		bullet_rotation_degrees = 0
 
-
 func _on_timer_timeout():
 	shoot()
 
@@ -59,6 +70,9 @@ func shoot():
 	
 	# rotate the bullet so that it is facing forward when shot
 	b.rotation_degrees = bullet_rotation_degrees
+	
+	# play laser sfx
+	LaserSFX.play()
 	
 	add_child(b)
 
@@ -81,5 +95,3 @@ func level_up():
 	speed *= 1.1
 	max_health *= 1.1
 	health = max_health
-
-
