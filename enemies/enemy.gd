@@ -1,5 +1,8 @@
 class_name Enemy extends CharacterBody2D
 
+var FCT_scene = preload("res://enemies/FCT/FCT.tscn")
+var XP_Shard_scene = preload("res://items/xp/xp_shard.tscn")
+
 @export var run_speed = 100
 @export var health = 100
 
@@ -10,17 +13,27 @@ const VECTOR_TO_DIRECTION_DICT = {
 	Vector2(0, 1): 'down',
 }
 
-
-var player = null
+var player: Player
 
 func _physics_process(delta):
-	if !player:
-		player = get_node("/root/TestLevel/Player")
-	else:
+		if !player:
+			player = get_tree().get_nodes_in_group("Player")[0]
+			return
 		velocity = position.direction_to(player.position) * run_speed
 		move_and_collide(velocity * delta)
 		handle_animation()
-		
+
+func take_damage(damage_amount):
+	health -= damage_amount
+	show_damage(damage_amount)
+
+	if health <= 0:
+		var shard = XP_Shard_scene.instantiate()
+		get_parent().add_child(shard)
+		shard.position = global_position
+		# added to show FCT and death animation
+		await get_tree().create_timer(1).timeout
+		queue_free()
 
 
 func handle_animation():
@@ -49,3 +62,10 @@ func get_facing_vector(vec_to_player):
 	return facing
 
 
+func show_damage(damage_amount):
+	# this expects you to add a Marker2d to every enemy named FCT to show the dmg
+	if !$FCT:
+		return
+	var fct = FCT_scene.instantiate()
+	$FCT.add_child(fct)
+	fct.show_dmg(damage_amount, fct)

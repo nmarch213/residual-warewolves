@@ -1,3 +1,4 @@
+
 [gd_scene load_steps=22 format=3 uid="uid://ct7eqyy6fx1lm"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_4eu5c"]
@@ -6,21 +7,6 @@
 [ext_resource type="AudioStream" uid="uid://dcfqd43jd1wjk" path="res://assets/sound/SFX/laserShoot.wav" id="4_olqv0"]
 [ext_resource type="AudioStream" uid="uid://lbfm41jav0oi" path="res://assets/sound/SFX/hitHurt.wav" id="5_vaey2"]
 [ext_resource type="AudioStream" uid="uid://vpfav1leudmu" path="res://assets/sound/SFX/Howl_low.wav" id="6_aic2r"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r7r4s"]
-size = Vector2(93, 94)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4uwim"]
-atlas = ExtResource("2_ytjt7")
-region = Rect2(0, 128, 48, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lai47"]
-atlas = ExtResource("2_ytjt7")
-region = Rect2(48, 128, 48, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j2dun"]
-atlas = ExtResource("2_ytjt7")
-region = Rect2(96, 128, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oyfx2"]
 atlas = ExtResource("2_ytjt7")
@@ -46,34 +32,8 @@ region = Rect2(48, 64, 48, 64)
 atlas = ExtResource("2_ytjt7")
 region = Rect2(96, 64, 48, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1jwnn"]
-atlas = ExtResource("2_ytjt7")
-region = Rect2(0, 0, 48, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ck4lu"]
-atlas = ExtResource("2_ytjt7")
-region = Rect2(48, 0, 48, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ig0ib"]
-atlas = ExtResource("2_ytjt7")
-region = Rect2(96, 0, 48, 64)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_v16l3"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4uwim")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lai47")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j2dun")
-}],
-"loop": true,
-"name": &"down",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_oyfx2")
@@ -101,20 +61,6 @@ animations = [{
 "loop": true,
 "name": &"right",
 "speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1jwnn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ck4lu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ig0ib")
-}],
-"loop": true,
-"name": &"up",
-"speed": 5.0
 }]
 
 [sub_resource type="Curve2D" id="Curve2D_p1vq1"]
@@ -123,14 +69,16 @@ _data = {
 }
 point_count = 10
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r7r4s"]
+size = Vector2(93, 94)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_olsah"]
+radius = 143.892
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 position = Vector2(2.08165e-12, 2.08165e-12)
 script = ExtResource("1_4eu5c")
 Bullet = ExtResource("2_32vb0")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.5, -2.08165e-12)
-shape = SubResource("RectangleShape2D_r7r4s")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(0.998677, 1)
@@ -143,7 +91,8 @@ editor_draw_drag_margin = true
 position = Vector2(-1.14441e-05, -14)
 scale = Vector2(3.16667, 2.04688)
 sprite_frames = SubResource("SpriteFrames_v16l3")
-animation = &"down"
+animation = &"right"
+autoplay = "right"
 
 [node name="SpawnPath" type="Path2D" parent="."]
 scale = Vector2(0.879826, 0.74912)
@@ -154,7 +103,7 @@ position = Vector2(774.016, -743.539)
 rotation = -2.85718
 
 [node name="Muzzle" type="Marker2D" parent="."]
-position = Vector2(76, -21)
+position = Vector2(90, 2.08165e-12)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
@@ -177,3 +126,14 @@ stream = ExtResource("6_aic2r")
 bus = &"SFX"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, -2.08165e-12)
+shape = SubResource("RectangleShape2D_r7r4s")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_olsah")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
