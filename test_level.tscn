@@ -66,6 +66,7 @@ script = ExtResource("1_qq6qi")
 [node name="UserInterface" parent="." instance=ExtResource("2_uy2vw")]
 
 [node name="Player" parent="." instance=ExtResource("1_8il70")]
+z_index = 2
 position = Vector2(969, 623)
 
 [node name="Snake" parent="." instance=ExtResource("2_tnnoi")]

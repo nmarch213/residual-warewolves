@@ -3,8 +3,6 @@ class_name Player
 
 signal experience_gained()
 
-@export var health = 100
-@export var max_health = 100
 @export var speed = 400
 @export var Bullet : PackedScene
 
@@ -22,8 +20,29 @@ var muzzle_right_vector = Vector2(90, 0)
 var muzzle_left_vector = Vector2(-90, 0)
 var bullet_rotation_degrees = 0
 
+func _ready():
+	$HealthTracker.current_hp = $HealthTracker.max_hp / 2
+
 func _physics_process(_delta):
-	# handle player movement
+	# Make sprite damage% redder
+	var health_pct = $HealthTracker.current_hp / $HealthTracker.max_hp
+	$Sprite.modulate = Color(1, health_pct, health_pct)
+
+	move()
+
+# SIGNALS
+func _on_timer_timeout():
+	shoot()
+
+func _on_health_tracker_death():
+	#TODO: display a game over
+	get_tree().change_scene_to_file("res://menus/main_menu.tscn")
+
+func _on_health_regen_timer_timeout():
+	$HealthTracker.heal(10)
+
+# METHODS
+func move():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed
 	move_and_slide()
@@ -54,10 +73,6 @@ func _physics_process(_delta):
 		
 		# update this so the bullet is rotated to face forward when shot
 		bullet_rotation_degrees = 0
-
-func _on_timer_timeout():
-	shoot()
-
 
 func shoot():
 	var b = Bullet.instantiate()
@@ -93,5 +108,5 @@ func level_up():
 	print("Level Up! Level: ", level)
 	# increase the player's speed by 10%
 	speed *= 1.1
-	max_health *= 1.1
-	health = max_health
+	$HealthTracker.max_hp *= 1.1
+	$HealthTracker.heal_full()

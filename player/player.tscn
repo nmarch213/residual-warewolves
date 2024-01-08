@@ -1,9 +1,9 @@
-
 [gd_scene load_steps=22 format=3 uid="uid://ct7eqyy6fx1lm"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_4eu5c"]
 [ext_resource type="PackedScene" uid="uid://chipkr4bkx17o" path="res://assets/weapons/bullet.tscn" id="2_32vb0"]
 [ext_resource type="Texture2D" uid="uid://vyhot02s7a46" path="res://assets/player/Werewolf.png" id="2_ytjt7"]
+[ext_resource type="Script" path="res://components/HealthTracker.gd" id="4_ms58d"]
 [ext_resource type="AudioStream" uid="uid://dcfqd43jd1wjk" path="res://assets/sound/SFX/laserShoot.wav" id="4_olqv0"]
 [ext_resource type="AudioStream" uid="uid://lbfm41jav0oi" path="res://assets/sound/SFX/hitHurt.wav" id="5_vaey2"]
 [ext_resource type="AudioStream" uid="uid://vpfav1leudmu" path="res://assets/sound/SFX/Howl_low.wav" id="6_aic2r"]
@@ -77,6 +77,8 @@ radius = 143.892
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 position = Vector2(2.08165e-12, 2.08165e-12)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_4eu5c")
 Bullet = ExtResource("2_32vb0")
 
@@ -109,6 +111,13 @@ position = Vector2(90, 2.08165e-12)
 wait_time = 2.0
 autostart = true
 
+[node name="HealthTracker" type="Node2D" parent="."]
+script = ExtResource("4_ms58d")
+max_hp = 1000.0
+
+[node name="HealthRegenTimer" type="Timer" parent="."]
+autostart = true
+
 [node name="HitTimer" type="Timer" parent="."]
 process_callback = 0
 one_shot = true
@@ -136,4 +145,8 @@ shape = SubResource("RectangleShape2D_r7r4s")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_olsah")
 
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="death" from="HealthTracker" to="." method="_on_health_tracker_death"]
+[connection signal="timeout" from="HealthRegenTimer" to="." method="_on_health_regen_timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

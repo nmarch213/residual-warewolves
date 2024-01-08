@@ -4,7 +4,7 @@ var FCT_scene = preload("res://enemies/FCT/FCT.tscn")
 var XP_Shard_scene = preload("res://items/xp/xp_shard.tscn")
 
 @export var run_speed = 100
-@export var health = 100
+@export var dmg = 1
 
 const VECTOR_TO_DIRECTION_DICT = {
 	Vector2(1, 0): 'right',
@@ -14,6 +14,7 @@ const VECTOR_TO_DIRECTION_DICT = {
 }
 
 var player: Player
+var dmg_body: Player
 
 func _physics_process(delta):
 		if !player:
@@ -22,19 +23,6 @@ func _physics_process(delta):
 		velocity = position.direction_to(player.position) * run_speed
 		move_and_collide(velocity * delta)
 		handle_animation()
-
-func take_damage(damage_amount):
-	health -= damage_amount
-	show_damage(damage_amount)
-
-	if health <= 0:
-		var shard = XP_Shard_scene.instantiate()
-		get_parent().add_child(shard)
-		shard.position = global_position
-		# added to show FCT and death animation
-		await get_tree().create_timer(1).timeout
-		queue_free()
-
 
 func handle_animation():
 	var vec_to_player = player.global_position - global_position
@@ -61,11 +49,28 @@ func get_facing_vector(vec_to_player):
 			facing = vec
 	return facing
 
-
-func show_damage(damage_amount):
-	# this expects you to add a Marker2d to every enemy named FCT to show the dmg
+func _on_health_tracker_damage_taken(amount):
 	if !$FCT:
 		return
 	var fct = FCT_scene.instantiate()
 	$FCT.add_child(fct)
-	fct.show_dmg(damage_amount, fct)
+	fct.show_dmg(amount, fct)
+
+
+func _on_health_tracker_death():
+	var shard = XP_Shard_scene.instantiate()
+	get_parent().add_child(shard)
+	shard.position = global_position
+	queue_free()
+
+func _on_area_2d_body_entered(body):
+	if body.is_in_group("Player"):
+		dmg_body = body
+		
+func _on_damage_area_2d_body_exited(body):
+	if body.is_in_group("Player"):
+		dmg_body = null
+
+func _on_damage_timer_timeout():
+	if dmg_body:
+		dmg_body.get_node("HealthTracker").take_damage(dmg)

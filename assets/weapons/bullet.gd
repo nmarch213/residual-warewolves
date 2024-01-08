@@ -9,5 +9,5 @@ func _physics_process(delta):
 
 func _on_body_entered(body):
 	if body.is_in_group("enemy"):
-		body.take_damage(dmg)
+		body.get_node("HealthTracker").take_damage(dmg)
 	queue_free()
