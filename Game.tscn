@@ -1007,6 +1007,5 @@ unique_name_in_owner = true
 
 [connection signal="timeout" from="Spawner/SnakeTimer" to="Spawner" method="_on_snake_timer_timeout"]
 [connection signal="experience_gained" from="Player" to="UserInterface" method="_on_player_experience_gained"]
-[connection signal="timeout" from="Player/Timer" to="Player" method="_on_timer_timeout"]
 
 [editable path="Player"]

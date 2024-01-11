@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ct7eqyy6fx1lm"]
+[gd_scene load_steps=18 format=3 uid="uid://ct7eqyy6fx1lm"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_4eu5c"]
 [ext_resource type="PackedScene" uid="uid://chipkr4bkx17o" path="res://assets/weapons/bullet.tscn" id="2_32vb0"]
@@ -134,8 +134,6 @@ bus = &"SFX"
 stream = ExtResource("6_aic2r")
 bus = &"SFX"
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, -2.08165e-12)
 shape = SubResource("RectangleShape2D_r7r4s")
@@ -144,7 +142,6 @@ shape = SubResource("RectangleShape2D_r7r4s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_olsah")
-
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="death" from="HealthTracker" to="." method="_on_health_tracker_death"]
