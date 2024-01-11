@@ -59,12 +59,14 @@ func _on_health_tracker_damage_taken(amount):
 
 func _on_health_tracker_death():
 	var shard = XP_Shard_scene.instantiate()
-	get_parent().add_child(shard)
+	#get_parent().add_child(shard)
+	get_parent().call_deferred("add_child", shard)
 	shard.position = global_position
 	queue_free()
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("Player"):
+		print("in area entered")
 		dmg_body = body
 		
 func _on_damage_area_2d_body_exited(body):
@@ -73,4 +75,5 @@ func _on_damage_area_2d_body_exited(body):
 
 func _on_damage_timer_timeout():
 	if dmg_body:
+		print("on timer timeout")
 		dmg_body.get_node("HealthTracker").take_damage(dmg)

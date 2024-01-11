@@ -7,7 +7,6 @@ signal experience_gained()
 @export var Bullet : PackedScene
 
 @onready var LaserSFX = $LaserShoot
-@onready var PlayerHitSFX = $PlayerHit
 @onready var PlayerDeathSFX = $PlayerDeath
 
 # XP System
@@ -49,14 +48,6 @@ func move():
 	
 	if input_direction.x == 0 and input_direction.y == 0:
 		$Sprite.stop()
-		
-		#attempting to add some sort of timer mechanic to prevent ear spam from the hit SFX.
-		if $HitTimer.time_left == 0:
-			PlayerHitSFX.play()
-			$HitTimer.start()
-		
-		
-		
 	elif input_direction.x <= 0 && input_direction.y == 0:
 		$Sprite.play("left")
 		
@@ -76,9 +67,10 @@ func move():
 
 func shoot():
 	var b = Bullet.instantiate()
+	var muzzleTransform = $Muzzle.transform
 	
 	# set the bullet transform to the muzzle transform (relative to the player)
-	b.transform = $Muzzle.transform
+	b.transform = muzzleTransform
 	
 	# move the position up slightly so that the bullet comes out of the werewolve's mouth
 	b.position.y -= 20

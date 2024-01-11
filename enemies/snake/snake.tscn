@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://hl8ojdt3gn5p" path="res://assets/enemies/Snake Rework.png" id="1_5gsyj"]
 [ext_resource type="Script" path="res://enemies/snake/snake.gd" id="1_ps1nu"]
-[ext_resource type="Script" path="res://components/HealthTracker.gd" id="3_t3gk0"]
+[ext_resource type="PackedScene" uid="uid://txt1e7wowvm3" path="res://components/health_tracker.tscn" id="3_htfmr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_umqoh"]
 radius = 38.0132
@@ -136,9 +136,6 @@ animation = &"left"
 visibility_layer = 2
 position = Vector2(-2, -63)
 
-[node name="HealthTracker" type="Node2D" parent="."]
-script = ExtResource("3_t3gk0")
-
 [node name="DamageTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
@@ -150,8 +147,8 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea2D"]
 shape = SubResource("CircleShape2D_g5byl")
 
-[connection signal="damage_taken" from="HealthTracker" to="." method="_on_health_tracker_damage_taken"]
-[connection signal="death" from="HealthTracker" to="." method="_on_health_tracker_death"]
+[node name="HealthTracker" parent="." instance=ExtResource("3_htfmr")]
+
 [connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]
 [connection signal="body_entered" from="DamageArea2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="DamageArea2D" to="." method="_on_damage_area_2d_body_exited"]

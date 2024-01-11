@@ -1,7 +1,7 @@
 extends Node
 
 var snake = preload("res://enemies/snake/Snake.tscn")
-@onready var player = %Player;
+@onready var player = $"../Player";
 
 @export var spawn_location: PathFollow2D 
 

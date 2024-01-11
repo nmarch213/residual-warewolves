@@ -1,6 +1,7 @@
 extends Node2D
 class_name HealthTracker
 
+@export var hit_sfx: AudioStreamPlayer
 @export var max_hp := 100.0
 var current_hp : float
 
@@ -13,6 +14,12 @@ func _ready():
 	current_hp = max_hp
 
 func take_damage(damage):
+	print("in take damage")
+	if(hit_sfx):
+		hit_sfx.play()
+	if $HitTimer.time_left == 0:
+		$HitTimer.start()
+		
 	current_hp -= damage
 	damage_taken.emit(damage)
 	if current_hp <= 0:

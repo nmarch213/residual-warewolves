@@ -1,24 +1,36 @@
-[gd_scene load_steps=6 format=3 uid="uid://ca2276jwxfcwb"]
+[gd_scene load_steps=10 format=3 uid="uid://ca2276jwxfcwb"]
 
 [ext_resource type="TileSet" uid="uid://b066r2gwy2rlh" path="res://assets/tileset/level_1.tres" id="1_raxgv"]
 [ext_resource type="Texture2D" uid="uid://c6j6fypx47u76" path="res://assets/tileset/2d_lights_and_shadows_neutral_point_light.webp" id="2_a50e0"]
+[ext_resource type="PackedScene" uid="uid://b88vfanaph2lc" path="res://enemies/snake/snake.tscn" id="5_mw2ry"]
+[ext_resource type="Script" path="res://Spawner.gd" id="6_hwejn"]
+[ext_resource type="AudioStream" uid="uid://lbfm41jav0oi" path="res://assets/sound/SFX/hitHurt.wav" id="7_d86it"]
 [ext_resource type="AudioStream" uid="uid://ylsjnxfhhulf" path="res://assets/sound/music/Level 1/Forest Track.wav" id="9_1h3fq"]
 [ext_resource type="PackedScene" uid="uid://ct7eqyy6fx1lm" path="res://player/player.tscn" id="10_epved"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_lnvfu"]
+[sub_resource type="GDScript" id="GDScript_jxstx"]
+script/source = "extends Timer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+	pass
+"
+
+[sub_resource type="Curve2D" id="Curve2D_6a53c"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 774.016, -743.539, 0, 0, 0, 0, -7.39941, -976.551, 0, 0, 0, 0, -906.997, -703.492, 0, 0, 0, 0, -1042.25, 17.3537, 0, 0, 0, 0, -851.304, 706.162, 0, 0, 0, 0, 1.13659, 939.769, 0, 0, 0, 0, 615.682, 450.961, 0, 0, 0, 0, 944.505, 9.3443, 0, 0, 0, 0, 776.289, -739.534, 0, 0, 0, 0, 774.016, -743.539)
+}
+point_count = 10
 
 [node name="Level 1" type="Node2D"]
 y_sort_enabled = true
 metadata/_edit_horizontal_guides_ = [481.0]
-
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
-position = Vector2(1244, 53)
-sprite_frames = SubResource("SpriteFrames_lnvfu")
-frame_progress = 0.401445
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("1_raxgv")
@@ -45,7 +57,7 @@ layer_5/tile_data = PackedInt32Array(327681, 1376257, 8, 851969, 786433, 16, 917
 color = Color(0.85098, 0.615686, 0, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="TileMap"]
-position = Vector2(2062, 49)
+position = Vector2(2233, 112)
 scale = Vector2(11.7813, 8.54297)
 energy = 0.36
 texture = ExtResource("2_a50e0")
@@ -59,3 +71,30 @@ autoplay = true
 [node name="Player" parent="." instance=ExtResource("10_epved")]
 position = Vector2(969, 623)
 scale = Vector2(0.295, 0.295)
+
+[node name="Snake" parent="." instance=ExtResource("5_mw2ry")]
+position = Vector2(295, 55)
+run_speed = 40
+
+[node name="Spawner" type="Node" parent="." node_paths=PackedStringArray("spawn_location")]
+script = ExtResource("6_hwejn")
+spawn_location = NodePath("../SpawnPath/SpawnLocation")
+
+[node name="SnakeTimer" type="Timer" parent="Spawner"]
+autostart = true
+script = SubResource("GDScript_jxstx")
+
+[node name="SpawnPath" type="Path2D" parent="."]
+position = Vector2(757.374, 403.562)
+scale = Vector2(0.723793, 0.411205)
+curve = SubResource("Curve2D_6a53c")
+
+[node name="SpawnLocation" type="PathFollow2D" parent="SpawnPath"]
+position = Vector2(774.016, -743.539)
+rotation = -2.8518
+
+[node name="PlayerHit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_d86it")
+bus = &"SFX"
+
+[connection signal="timeout" from="Spawner/SnakeTimer" to="Spawner" method="_on_snake_timer_timeout"]
