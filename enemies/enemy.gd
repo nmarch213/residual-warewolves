@@ -59,7 +59,7 @@ func _on_health_tracker_damage_taken(amount):
 
 func _on_health_tracker_death():
 	var shard = XP_Shard_scene.instantiate()
-	get_parent().add_child(shard)
+	get_parent().call_deferred("add_child", shard)
 	shard.position = global_position
 	queue_free()
 
