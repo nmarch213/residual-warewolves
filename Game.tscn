@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bafsic0i72r18"]
+[gd_scene load_steps=14 format=3 uid="uid://bafsic0i72r18"]
 
 [ext_resource type="PackedScene" uid="uid://cti1e85mbax17" path="res://player/ui.tscn" id="1_5eixk"]
 [ext_resource type="Script" path="res://game.gd" id="1_72ugb"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://csojx2bbp4vmw" path="res://assets/tileset/Forest Props.png" id="5_ukm3c"]
 [ext_resource type="Texture2D" uid="uid://lbpy40yq2004" path="res://assets/tileset/Forest Cliff.png" id="6_0cjgd"]
 [ext_resource type="Script" path="res://Spawner.gd" id="7_ahwqw"]
+[ext_resource type="PackedScene" uid="uid://ca2276jwxfcwb" path="res://level_1.tscn" id="8_lxsnh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ovp0g"]
 texture = ExtResource("4_qdgo6")
@@ -981,10 +982,13 @@ script = ExtResource("1_72ugb")
 player = NodePath("Player")
 ui = NodePath("UserInterface")
 
+[node name="Level 1" parent="." instance=ExtResource("8_lxsnh")]
+
 [node name="UserInterface" parent="." instance=ExtResource("1_5eixk")]
 follow_viewport_enabled = false
 
 [node name="TileMap" type="TileMap" parent="."]
+visible = false
 position = Vector2(2, 2)
 scale = Vector2(2, 2)
 tile_set = SubResource("TileSet_8i1dx")
